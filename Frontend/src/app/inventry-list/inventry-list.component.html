@@ -1,0 +1,405 @@
+<!-- The Modal -->
+<div class="modal fade" id="addInventoryeModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add Inventory</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <form [formGroup]="createForm" method="POST" enctype="multipart/form-data" class="form-horizontal"
+          novalidate="">
+          <fieldset>
+
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Product name
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="listing" formControlName="product_name">
+
+              </div>
+            </div>
+
+
+            <div class="form-group ">
+              <label class="col-sm-2 control-label ">
+                Vendor
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="listing" formControlName="vendor">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Mrp
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="listing" formControlName="mrp">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Batch num
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="listing" formControlName="batch_num">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Batch date
+              </label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" name="listing" formControlName="batch_date">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Quantity
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="listing" formControlName="quantity">
+              </div>
+            </div>
+
+            <!-- <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Status
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" class="form-control" name="listing" formControlName="approved">
+              </div>
+            </div> -->
+            <!-- <div class="form-actions">
+              <button (click)="createInventory()" class="btn btn-primary js-tooltip" title="">Create Inventory</button>
+            </div> -->
+          </fieldset>
+        </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="form-actions">
+          <button (click)="createInventory()" class="btn btn-success" title="">Add</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="selectedInventory" class="modal fade" id="editEmployeeModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Inventory</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <form method="POST" enctype="multipart/form-data" class="form-horizontal" novalidate="">
+          <fieldset>
+
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Product name
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="product_name"
+                  [(ngModel)]="selectedInventory.product_name">
+
+              </div>
+            </div>
+
+
+            <div class="form-group ">
+              <label class="col-sm-2 control-label ">
+                Vendor
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="vendor" [(ngModel)]="selectedInventory.vendor">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Mrp
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="mrp" [(ngModel)]="selectedInventory.mrp">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Batch num
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="batch_num" [(ngModel)]="selectedInventory.batch_num">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Batch date
+              </label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" name="batch_date" [(ngModel)]="selectedInventory.batch_date">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Quantity
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="quantity" [(ngModel)]="selectedInventory.quantity">
+              </div>
+            </div>
+          </fieldset>
+        </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="form-actions">
+          <button (click)="updateInventory()" class="btn btn-success" title="">Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="selectedInventory" class="modal fade" id="approveEmployeeModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Inventory</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <form method="POST" enctype="multipart/form-data" class="form-horizontal" novalidate="">
+          <fieldset>
+
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Product name
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="product_name"
+                  [(ngModel)]="selectedInventory.product_name">
+              </div>
+            </div>
+
+
+            <div class="form-group ">
+              <label class="col-sm-2 control-label ">
+                Vendor
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="vendor" [(ngModel)]="selectedInventory.vendor">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Mrp
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="mrp" [(ngModel)]="selectedInventory.mrp">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Batch num
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="batch_num" [(ngModel)]="selectedInventory.batch_num">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Batch date
+              </label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" name="batch_date" [(ngModel)]="selectedInventory.batch_date">
+              </div>
+            </div>
+
+            <div class="form-group ">
+
+              <label class="col-sm-2 control-label ">
+                Quantity
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="quantity" [(ngModel)]="selectedInventory.quantity">
+              </div>
+            </div>
+          </fieldset>
+        </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="form-actions">
+          <button (click)="approveInventory()" class="btn btn-success" title="">Approve</button>
+        </div>
+        <div class="form-actions">
+          <button (click)="rejectInventory()" class="btn btn-danger" title="">Reject</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="selectedInventory" class="modal fade" id="deleteProductModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Inventory</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h1>Sure Want to delete the Inventory {{ selectedInventory.product_name}}</h1>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="form-actions">
+          <button (click)="deleteInventory(selectedInventory.product_id)" class="btn btn-success" title="">Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Welcome {{userDisplayName}}</h2><br />
+  <p><a [routerLink]="['']">Logout</a></p>
+
+  <div class="table-title">
+    <div class="row">
+      <div class="col-sm-6">
+        <h2>Manage <b>Inventory</b></h2>
+      </div>
+      <div class="col-sm-6">
+        <a data-target="#addInventoryeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons"></i>
+          <span>Add New Inventory</span></a>
+        <a [routerLink]="['/inventory']" class="btn btn-danger" data-toggle="modal"><i class="material-icons"></i>
+          <span>Approved</span></a>
+      </div>
+    </div>
+  </div>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <th>Vendor</th>
+        <th>MRP</th>
+        <th>Batch Num</th>
+        <th>Batch Date</th>
+        <th>Quantity</th>
+        <th>Action</th>
+        <th>Approval</th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inventory of inventories">
+        <td>{{inventory.product_id}}</td>
+        <td>{{inventory.product_name}}</td>
+        <td>{{inventory.vendor}}</td>
+        <td>{{inventory.mrp}}</td>
+        <td>{{inventory.batch_num}}</td>
+        <td>{{inventory.batch_date}}</td>
+        <td>{{inventory.quantity}}</td>
+        <td>{{inventory.action}}</td>
+        <td>{{inventory.status}}</td>
+
+        <!-- <ng-template #elseBlock>Pending</ng-template> -->
+        <td>
+          <div *ngIf='inventory.status ===  "pending" '>
+            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
+                data-toggle="tooltip" title="" data-original-title="Edit">
+                <button (click)="selectInventory(inventory.product_id)" class="btn-sm btn btn-primary js-tooltip"
+                  title="">Edit
+                </button>
+              </i></a>
+            <a href="#deleteProductModal" class="delete" data-toggle="modal"><i class="material-icons"
+                data-toggle="tooltip" title="" data-original-title="Delete">
+                <button (click)="selectInventory(inventory.product_id)" class="btn-sm btn btn-danger js-tooltip"
+                  title="">
+                  Delete
+                </button>
+              </i></a>
+            <a href="#approveEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
+                data-toggle="tooltip" title="" data-original-title="Delete">
+                <button (click)="selectInventory(inventory.product_id)" class="btn-sm btn btn-secondary js-tooltip"
+                  title="">
+                  Approval
+                </button>
+              </i></a>
+          </div>
+          <div *ngIf='inventory.status !==  "pending" '>
+            <b>Reviewed</b>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
