@@ -99,7 +99,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <div class="form-actions">
-          <button (click)="createInventory()" class="btn btn-success" title="">Add</button>
+          <button (click)="createInventory()" class="btn btn-success" data-dismiss="modal" title="">Add</button>
         </div>
       </div>
 
@@ -196,7 +196,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <div class="form-actions">
-          <button (click)="updateInventory()" class="btn btn-success" title="">Submit</button>
+          <button (click)="updateInventory()" class="btn btn-success" data-dismiss="modal" title="">Submit</button>
         </div>
       </div>
 
@@ -220,7 +220,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <div class="form-actions">
-          <button (click)="deleteInventory(selectedInventory.product_id)" class="btn btn-success" title="">Delete
+          <button (click)="deleteInventory(selectedInventory.product_id)" data-dismiss="modal" class="btn btn-success" title="">Delete
           </button>
         </div>
       </div>

@@ -40,6 +40,7 @@ export class InventryListComponent implements OnInit {
 
   ];
   userDisplayName = '';
+  Role;
   createForm: FormGroup;
   editForm: FormGroup;
 
@@ -96,6 +97,7 @@ export class InventryListComponent implements OnInit {
         this.inventories = this.inventories.filter((inventory) => {
           return inventory.product_id !== inventoryId;
         });
+        this.getProductes();
       },
       error => {
         console.log(error);
@@ -108,6 +110,7 @@ export class InventryListComponent implements OnInit {
     this.selectedInventory.status = 'Approved';
     this.api.approveOrReject(this.selectedInventory).subscribe(
       (data) => {
+        this.getProductes();
       },
       error => {
         // this.selectedInventory = this.tempInventory;
@@ -120,6 +123,7 @@ export class InventryListComponent implements OnInit {
     this.selectedInventory.status = 'Rejected';
     this.api.approveOrReject(this.selectedInventory).subscribe(
       (data) => {
+        this.getProductes();
       },
       error => {
         // this.selectedInventory = this.tempInventory;
@@ -137,12 +141,15 @@ export class InventryListComponent implements OnInit {
 
   ngOnInit() {
     this.userDisplayName = sessionStorage.getItem('loggedUser');
+    this.Role = localStorage.getItem('Role').toString()
+    console.log(this.Role,"Role")
   }
 
 
   updateInventory() {
     this.api.updateApprovalInventory(this.selectedInventory).subscribe(
       (data) => {
+        this.getProductes();
       },
       error => {
         // this.selectedInventory = this.tempInventory;

@@ -15,9 +15,15 @@ from . import serializers
 
 from .models import Inventory,InventoryApproval
 from django.contrib.auth.models import User
-from .serializers import InventorySerializer,UserSerializer,InventoryApprovalSerializer
+from .serializers import InventorySerializer,UserSerializer,InventoryApprovalSerializer,MyTokenObtainPairSerializer
 from .permissions import IsLoggedInUserOrAdmin,IsAdminUser
 
+
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -31,22 +37,15 @@ class UserViewSet(viewsets.ModelViewSet):
 	# authentication_classes = (TokenAuthentication,)
 	permission_classes = (IsAuthenticated, )
 
-	def get_permissions(self):
-		permission_classes = []
-		if self.action == 'create':
-			permission_classes = [AllowAny]
-		elif self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-			permission_classes = [IsLoggedInUserOrAdmin]
-		elif self.action == 'list' or self.action == 'destroy':
-			permission_classes = [IsAdminUser]
-		return [permission() for permission in permission_classes]
-
-class HelloView(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-        content = {'message': 'Hello, World!'}
-        return Response(content)
+	# def get_permissions(self):
+	# 	permission_classes = []
+	# 	if self.action == 'create':
+	# 		permission_classes = [AllowAny]
+	# 	elif self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
+	# 		permission_classes = [IsLoggedInUserOrAdmin]
+	# 	elif self.action == 'list' or self.action == 'destroy':
+	# 		permission_classes = [IsAdminUser]
+	# 	return [permission() for permission in permission_classes]
 
 
 # Inventory record that has been approved
@@ -280,6 +279,7 @@ class InventoryManagerApproval(APIView):
 			return Response(context)
 
 		else:
+			print("Store manager")
 			master = InventorySerializer(masterSnippet, data=request.data)
 			if master.is_valid():
 				master.save()

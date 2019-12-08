@@ -81,6 +81,7 @@ export class InventoryComponent implements OnInit {
         this.inventories = this.inventories.filter((inventory) => {
           return inventory.product_id !== inventoryId;
         });
+        this.getProductes();
       },
       error => {
         console.log(error);
@@ -103,6 +104,7 @@ export class InventoryComponent implements OnInit {
   updateInventory() {
     this.api.updateInventory(this.selectedInventory).subscribe(
       (data) => {
+        this.getProductes();
       },
       error => {
         // this.selectedInventory = this.tempInventory;

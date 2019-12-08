@@ -22,6 +22,7 @@ export class AccountService {
             if (user && user['access']) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('Role',user['groups'][0]);
             }
 
             return user;
@@ -32,6 +33,8 @@ export class AccountService {
   logout() {
     // remove user from local storage to log user out
     // alert("ll")
-    localStorage.removeItem('currentUser');
+    // localStorage.removeItem('currentUser');
+    localStorage.clear();
+    sessionStorage.clear();
 }
 }

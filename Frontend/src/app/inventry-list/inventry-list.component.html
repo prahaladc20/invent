@@ -195,7 +195,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <div class="form-actions">
-          <button (click)="updateInventory()" class="btn btn-success" title="">Submit</button>
+          <button (click)="updateInventory()" class="btn btn-success" data-dismiss="modal" title="">Submit</button>
         </div>
       </div>
 
@@ -290,10 +290,10 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <div class="form-actions">
-          <button (click)="approveInventory()" class="btn btn-success" title="">Approve</button>
+          <button (click)="approveInventory()" data-dismiss="modal" class="btn btn-success" title="">Approve</button>
         </div>
         <div class="form-actions">
-          <button (click)="rejectInventory()" class="btn btn-danger" title="">Reject</button>
+          <button (click)="rejectInventory()"  data-dismiss="modal" class="btn btn-danger" title="">Reject</button>
         </div>
       </div>
 
@@ -301,6 +301,27 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="noApprovePermission">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Approval</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h1>Only Store Manager can approve Inventory</h1>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 <div *ngIf="selectedInventory" class="modal fade" id="deleteProductModal">
   <div class="modal-dialog modal-dialog-centered">
@@ -318,7 +339,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <div class="form-actions">
-          <button (click)="deleteInventory(selectedInventory.product_id)" class="btn btn-success" title="">Delete
+          <button (click)="deleteInventory(selectedInventory.product_id)" data-dismiss="modal" class="btn btn-success" title="">Delete
           </button>
         </div>
       </div>
@@ -387,6 +408,7 @@
                   Delete
                 </button>
               </i></a>
+          <div *ngIf='Role==="Store Manager"; else NoPermission'>
             <a href="#approveEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
                 data-toggle="tooltip" title="" data-original-title="Delete">
                 <button (click)="selectInventory(inventory.product_id)" class="btn-sm btn btn-secondary js-tooltip"
@@ -395,6 +417,16 @@
                 </button>
               </i></a>
           </div>
+          </div>
+          <ng-template #NoPermission>
+            <a href="#noApprovePermission" class="delete" data-toggle="modal"><i class="material-icons"
+              data-toggle="tooltip" title="" data-original-title="Delete">
+              <button  class="btn-sm btn btn-secondary js-tooltip"
+                title="">
+                Approval
+              </button>
+            </i></a>
+          </ng-template>
           <div *ngIf='inventory.status !==  "pending" '>
             <b>Reviewed</b>
           </div>

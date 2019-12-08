@@ -4,8 +4,8 @@
     <h5 class="card-title">Login</h5>
     <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="text" class="form-control" id="email" placeholder="Email Address" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="email" placeholder="Username" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
             <div *ngIf="f.username.errors.required">Username is required</div>
           </div>
