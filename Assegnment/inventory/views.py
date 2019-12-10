@@ -271,18 +271,23 @@ class InventoryManagerApproval(APIView):
 
 
 		snippet = self.get_object(pk)
+		print('inventory approval snippet',snippet)
 		
-		masterSnippet = self.getMasterObject(snippet.master_id)
-
 		if not(request.user.groups.filter(name = 'Store Manager').exists()):
 			context = {'message':'Sorry! You are not a manager'}
 			return Response(context)
 
 		else:
 			print("Store manager")
-			master = InventorySerializer(masterSnippet, data=request.data)
-			if master.is_valid():
-				master.save()
+			if snippet.master_id:
+				masterSnippet = self.getMasterObject(snippet.master_id)
+				master = InventorySerializer(masterSnippet, data=request.data)
+				if master.is_valid():
+					master.save()
+			else:
+				master = InventorySerializer(data=request.data)
+				if master.is_valid():
+					master.save()
 
 			approval = InventoryApprovalSerializer(snippet, data=request.data)
 			if approval.is_valid():
