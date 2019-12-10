@@ -186,7 +186,7 @@ class InventoryListApproved(APIView):
 		return Response(serializers.data)	
 
 	def post(self,request,format=None):
-		print("lllllllllllllllllllllllll+++",request.data)
+		print("lNOOOOOOOOOOOOOOOOOOOOOOOOOOllllllllllllllllllllllll+++",request.data)
 
 		if (request.user.groups.filter(name = 'Store Manager').exists()):
 			print("LLLLLLLLLL",request.data)
@@ -234,7 +234,7 @@ class InventoryManagerApproval(APIView):
 		else:
 			snippet = self.get_object(request.data['product_id'])
 			if (request.data['status'] == 'Approved') : 
-				print("LLLLLLLLLL",request.data)
+				print("LLLLLLLLLLAAAAAAAAAPPROVAL",request.data)
 				inputData = {
 				 'author' : request.data['author'],
 				 'product_name' : request.data['product_name'], 
@@ -287,12 +287,12 @@ class InventoryManagerApproval(APIView):
 			approval = InventoryApprovalSerializer(snippet, data=request.data)
 			if approval.is_valid():
 				approval.save()
-			return Response(status=status.HTTP_201_UPDATED)
+			return Response(approval.data)
 		return Response(status=status.HTTP_400_BAD_REQUEST)
 
 	def delete(self, request, pk, format=None):
 		snippet = self.get_object(pk)
-		print(snippet.master_id, "snippet")
+		print(snippet.master_id, "snippet delteeeeeeeeeeeee")
 		
 		if not(request.user.groups.filter(name = 'Store Manager').exists()):
 			context = {'message':'Sorry! You are not a manager'}
